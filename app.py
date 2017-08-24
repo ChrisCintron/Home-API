@@ -1,25 +1,17 @@
 from flask import Flask
-import api
+import api_backend
+from flask_restful import Api
 
 
 app = Flask(__name__)
-
+api = Api(app)
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Home-Api Mainpage"
 
-@app.route("/api/query/v1.0/")
-def api_main_page():
-    return "getuserdata: /api/query/v1.0/userinfo"
-
-@app.route("/api/query/v1.0/userinfo", methods=['GET'])
-def get_userinfo():
-    return api.get_userinfo()
-
-@app.route("/api/query/v1.0/userinfo/<username>", methods=['GET'])
-def get_userinfo_by_username(username):
-    return api.get_userinfo(username)
+api.add_resource(api_backend.AllUsersInfo, "/api/query/v1.0/userinfo/" )
+api.add_resource(api_backend.UserInfo, "/api/query/v1.0/userinfo/<string:username>")
 
 
 if __name__ == '__main__':
