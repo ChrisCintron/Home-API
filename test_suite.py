@@ -1,7 +1,9 @@
 
 import api_backend
 
-
+#CURRENT TESTS ONLY VALIDATE TYPE
+#WORK IN PROGRESS
+#TEST USING PYTEST
 def test_AllUsersInfo_get(): #All users
     results = api_backend.AllUsersInfo.get('self')
     assert type(results) == list
